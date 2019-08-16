@@ -6,9 +6,35 @@
 	margin: 0 auto;
 	box-sizing: border-box;
 }
+
 .testing-app-table {
   width: 100%;
   margin-bottom: 30px;
+  position: relative;
+
+  @media (max-width: 767px) {
+    margin-top: 85px;
+  }
+}
+
+.table-full-width {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-size: 16px;
+}
+
+.element-symbol {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.6em;
+  height: 2.2em;
+  border: 2px solid #0F75BC;
+  border-radius: .25em;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .search-field {
@@ -21,6 +47,26 @@
   }
 
   &__input {
-    padding: 15px 0 0; 
+    padding: 16px 0 0;
+    font-size: 14px;
+
+    @media (max-width: 767px) {
+      position: absolute;
+      top: -70px;
+      left: 0;
+      padding-top: 0;
+      width: 100%;
+    }
   }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.footer {
+  margin-top: 20px;
+  min-height: 120px;
+  background-color: #343d46;
+  color: #eff1f5;
 }
