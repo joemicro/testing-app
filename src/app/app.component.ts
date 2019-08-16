@@ -1,5 +1,5 @@
 import {
-  Component, ViewChild, ViewChildren, QueryList, OnInit, ChangeDetectorRef
+  Component, ViewChild, OnInit, ChangeDetectorRef
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
@@ -38,8 +38,6 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   title = 'testing-app';
-
-  @ViewChildren("childrenInputs") childrenInputs: QueryList<any>;
 
   private buttonList: any = false;
   private inputList = [
