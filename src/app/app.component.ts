@@ -1,9 +1,12 @@
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component, ViewChild, ViewChildren, QueryList, OnInit, ChangeDetectorRef
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconRegistry } from '@angular/material/icon';
 import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
+import { ChangeDetection } from '@angular/cli/lib/config/schema';
 
 
 export interface PeriodicElement {
@@ -31,7 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -50,15 +53,36 @@ export class AppComponent {
   private isFilterActive:boolean = false;
   private myForm = new FormControl("childForm");
 
+  constructor(
+    private cd: ChangeDetectorRef
+  ) {};
+
   ngOnInit() {
     this.dataSource.sort = this.sort;
 
     this.myForm.disable();
-    
+
     this.myForm.valueChanges.subscribe(v => {
       /* causes ExpressionChangedAfterItHasBeenCheckedError. Fix error keep code structure in places.   */
       this.disabled = true;
+
+      /*What this means is that the change detection cycle itself seems to have caused a change,
+      which may have been accidental (ie the change detection cycle caused it somehow) or intentional.
+      If you do change something in a change detection cycle on purpose, then this should retrigger a new round of change detection,
+      which is not happening here. This error will be suppressed in prod mode, but means you have issues in your code and cause mysterious issues.
+
+      In this case, the specific issue is that you're changing something in a child's change detection cycle
+      which affects the parent, and this will not retrigger the parent's change detection even though asynchronous triggers like observables usually do.
+      The reason it doesn't retrigger the parent's cycle is becasue this violates unidirectional data flow,
+      and could create a situation where a child retriggers a parent change detection cycle,
+      which then retriggers the child, and then the parent again and so on, and causes an infinite change detection loop in your app.
+
+      It might sound like I'm saying that a child can't send messages to a parent component,
+      but this is not the case, the issue is that a child can't send a message to a parent during a change detection cycle (such as life cycle hooks),
+      it needs to happen outside, as in in response to a user event.*/
+      this.cd.detectChanges();
     });
+
   }
 
   applyFilter(filterValue: string) {
@@ -80,7 +104,15 @@ export class AppComponent {
 
   /* extract all dates from testData. ignore non date values */
   private extractDate (obj:any):Date[]{
-    return [new Date()];
+    let result = new Array<Date>();
+    Object.keys(obj).forEach(name => {
+      if (typeof(obj[name]) === 'Array') {
+        obj[name].forEach(item => {
+
+        });
+      }
+    });
+    return result;
   }
 
 
