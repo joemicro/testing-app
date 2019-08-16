@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule,MatInputModule} from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import { ChildFormComponent } from './child-form/child-form.component';
-import {ReactiveFormsModule} from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material';
 import { MatSortModule  } from '@angular/material';
 
@@ -23,6 +23,7 @@ import { MatSortModule  } from '@angular/material';
     MatCheckboxModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
     MatTableModule,
     MatIconModule,
     MatSortModule
