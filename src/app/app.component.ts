@@ -46,7 +46,7 @@ export class AppComponent {
   ];
 
   private disabled = false;
-
+  private searchFilter:string = '';
   private isFilterActive:boolean = false;
   private myForm = new FormControl("childForm");
 
@@ -63,8 +63,14 @@ export class AppComponent {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     this.isFilterActive = !!filterValue;
+  }
+
+  clearFilters() {
+    this.dataSource.filter = '';
+    this.searchFilter = '';
+    this.isFilterActive = false;
+
   }
 
   testData = {

@@ -64,6 +64,22 @@
       width: 100%;
     }
   }
+
+  &__clear-filter {
+    position: absolute;
+    top: -36px;
+    right: 0;
+    background-color: #ededed;
+    transform-origin: center bottom;
+    transform: perspective(200px) rotateX(90deg);
+    opacity: 0;
+    transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+
+    &_shown {
+      transform: perspective(200px) rotateX(0);
+      opacity: 1;
+    }
+  }
 }
 
 .mat-form-field {
