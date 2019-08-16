@@ -1,0 +1,26 @@
+.container {
+  padding-left: 20px;
+	padding-right: 20px;
+	width: 100%;
+	max-width: 1036px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+.testing-app-table {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &__label {
+  }
+
+  &__input {
+    padding: 15px 0 0; 
+  }
+}
